@@ -107,6 +107,9 @@ PUBLIC void out_char(CONSOLE *p_con, char ch)
 					*(p_vmem - 2) = ' ';
 					*(p_vmem - 1) = DEFAULT_CHAR_COLOR;
 					p_vmem -= 2;
+					if (mode == ESCMODE){
+						ESCInputLength-=1;
+					}
 				}
 				p_con->cursor = prePos;
 			}
@@ -215,6 +218,7 @@ PUBLIC void EXITEsc(CONSOLE *p_con)
 		p_vmem += 2;
 	}
 	ESCInputLength = 0;
+	ESCBeginPos = 0;
 	flush(p_con);
 }
 
